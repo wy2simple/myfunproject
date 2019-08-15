@@ -1,0 +1,9 @@
+---
+- name: Add the package repositories
+  shell: "curl -s -L https://nvidia.github.io/nvidia-docker/centos7/x86_64/nvidia-docker.repo | sudo tee /etc/yum.repos.d/nvidia-docker.repo"
+
+- name: Install NVIDIA-docker (2.0)
+  command: "sudo yum install nvidia-docker2 -y"
+
+- name: Reload Docker Daemon config
+  command: "sudo systemctl restart docker"

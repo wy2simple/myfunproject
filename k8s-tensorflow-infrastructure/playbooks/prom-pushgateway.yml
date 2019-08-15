@@ -1,0 +1,7 @@
+---
+- hosts: kube-master
+  become: no
+  gather_facts: yes
+  run_once: yes
+  roles:
+    - prom-pushgateway

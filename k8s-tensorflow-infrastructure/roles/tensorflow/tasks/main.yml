@@ -1,0 +1,11 @@
+---
+- name: Set up tensorflow yml
+  template:
+    src: tensorflow.yml.j2
+    dest: ~/tensorflow.yml
+    owner: hanwang
+    group: hanwang
+    mode: 0644
+
+- name: deploy tensorflow
+  command: "kubectl create -f ~/tensorflow.yml"

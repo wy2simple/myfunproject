@@ -1,0 +1,6 @@
+---
+- hosts: kube-node
+  gather_facts: yes
+  become: yes
+  roles:
+    - nvidia

@@ -1,0 +1,6 @@
+---
+- name: yum install python-pip
+  command: "sudo yum install python-pip -y"
+
+- name: pip install NVIDIA-ml-py, prometheus_client
+  command: "sudo pip install nvidia-ml-py prometheus_client"

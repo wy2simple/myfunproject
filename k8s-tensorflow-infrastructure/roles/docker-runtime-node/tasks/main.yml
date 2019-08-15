@@ -1,0 +1,12 @@
+---
+- name: set up docker daemon file for nodes
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Start docker
+  command: "sudo systemctl restart docker"
+

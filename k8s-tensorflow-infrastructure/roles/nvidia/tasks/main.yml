@@ -1,0 +1,18 @@
+---
+- name: Download NVIDIA driver
+  command: "curl -LO http://us.download.nvidia.com/tesla/390.30/nvidia-diag-driver-local-repo-rhel7-390.30-1.0-1.x86_64.rpm"
+
+- name: Install NVDIA driver
+  command: "sudo rpm -i nvidia-diag-driver-local-repo-rhel7-390.30-1.0-1.x86_64.rpm"
+
+- name: yum clean
+  command: "sudo yum clean all"
+
+- name: Install CUDA-drivers
+  command: "sudo yum install cuda-drivers -y"
+
+- name: Reboot system
+  command: "/sbin/shutdown -r +1"
+  async: 0
+  poll: 0
+  ignore_errors: true

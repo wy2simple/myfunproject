@@ -1,0 +1,12 @@
+[Unit]
+Description=My GPU-Prometheus-Exporter Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python /root/gpu-prom-exporter.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+---
+- name: Set up pushgateway.yml
+  template:
+    src: pushgateway.yml.j2
+    dest: ~/pushgateway.yml
+    owner: hanwang
+    group: hanwang
+    mode: 0600
+
+- name: Deploy Pushgateway-Prometheus
+  command: "kubectl create -f pushgateway.yml --namespace=monitoring"

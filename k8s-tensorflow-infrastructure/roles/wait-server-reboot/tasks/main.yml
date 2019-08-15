@@ -1,0 +1,10 @@
+---
+- name: wait server reboot
+  become: no
+  local_action: wait_for host={{ hostvars[inventory_hostname].ansible_ssh_host }}
+    state=started
+    port=22
+    delay=10
+    timeout=600
+    connect_timeout=60
+    search_regex=OpenSSH

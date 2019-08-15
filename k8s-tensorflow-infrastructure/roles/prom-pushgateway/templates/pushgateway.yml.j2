@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pushgateway
+  labels:
+    app: pushgateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pushgateway
+  template:
+    metadata:
+      labels:
+        app: pushgateway
+    spec:
+      containers:
+      - name: pushgateway
+        image: prom/pushgateway
+        ports:
+        - containerPort: 9091
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prom-pushgateway
+  namespace: monitoring
+spec:
+  selector:
+    app: pushgateway
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9091
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prom-pushgateway-nodeport
+  namespace: monitoring
+spec:
+  selector:
+    app: pushgateway
+  ports:
+  - protocol: TCP
+    nodePort: 32767
+    port: 9091
+  type: NodePort

@@ -1,0 +1,51 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: tensorflow
+  labels:
+    name: tensorflow
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: tensorflow
+    spec:
+      containers:
+        - name: tensorflow
+          image: tensorflow/tensorflow:1.4.0-rc0-gpu
+          imagePullPolicy: IfNotPresent
+          command: ["bash","-c","sleep 999999"]
+          ports:
+            - name: tensorflow
+              containerPort: 8888
+          resources: 
+            limits: 
+              nvidia.com/gpu: 1
+          volumeMounts:
+            - mountPath: /usr/local/nvidia
+              name: nvidia-driver
+            - mountPath: /dev/nvidia0
+              name: nvidia0
+            - mountPath: /dev/nvidia-uvm
+              name: nvidia-uvm
+            - mountPath: /dev/nvidia-uvm-tools
+              name: nvidia-uvm-tools
+            - mountPath: /dev/nvidiactl
+              name: nvidiactl
+      volumes:
+        - name: nvidia-driver
+          hostPath:
+            path: /var/lib/nvidia-docker/volumes/nvidia_driver/375.66
+        - name: nvidia0
+          hostPath:
+            path: /dev/nvidia0
+        - name: nvidia-uvm
+          hostPath:
+            path: /dev/nvidia-uvm
+        - name: nvidia-uvm-tools
+          hostPath:
+            path: /dev/nvidia-uvm-tools
+        - name: nvidiactl
+          hostPath:
+            path: /dev/nvidiactl

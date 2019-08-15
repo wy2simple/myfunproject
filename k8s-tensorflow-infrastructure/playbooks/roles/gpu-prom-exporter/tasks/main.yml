@@ -1,0 +1,25 @@
+---
+- name: Set up system service file
+  template:
+    src: gpu-prom-exporter.service.j2
+    dest: /etc/systemd/system/gpu-prom-exporter.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Set up gpu exporter file
+  template:
+    src: gpu-prom-exporter.py.j2
+    dest: /root/gpu-prom-exporter.py
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start/Restart service
+  command: "sudo systemctl daemon-reload"
+
+- name: Enable service
+  command: "sudo systemctl enable gpu-prom-exporter.service"
+
+- name: Start service
+  command: "sudo systemctl start gpu-prom-exporter.service"

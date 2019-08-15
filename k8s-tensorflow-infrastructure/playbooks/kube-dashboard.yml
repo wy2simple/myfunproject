@@ -1,0 +1,7 @@
+---
+- hosts: kube-master
+  gather_facts: yes
+  become: no
+  run_once: yes
+  roles:
+    - kube-dashboard

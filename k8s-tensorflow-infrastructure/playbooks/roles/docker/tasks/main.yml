@@ -1,0 +1,12 @@
+---
+- name: Install required packages
+  command: "sudo yum install -y yum-utils device-mapper-persistent-data lvm2"
+
+- name: Set up stable repo
+  command: "sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+
+- name: Install docker
+  command: "sudo yum install docker-ce -y"
+
+- name: Start docker
+  command: "sudo systemctl start docker"

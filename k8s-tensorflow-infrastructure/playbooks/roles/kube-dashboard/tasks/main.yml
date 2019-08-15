@@ -1,0 +1,11 @@
+---
+- name: set up yml file
+  template:
+    src: kube-dashb-sa.yml.j2
+    dest: ~/kube-dashb-sa.yml
+    owner: hanwang
+    group: hanwang
+    mode: 0664
+
+- name: create service account for kubernetes dashboard
+  command: "kubectl create -f ~/kube-dashb-sa.yml"
